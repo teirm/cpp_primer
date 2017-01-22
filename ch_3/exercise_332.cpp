@@ -26,6 +26,10 @@ int append_ints()
         vec_i.push_back(input);
     }
 
+    for (auto &elem : vec_i) {
+        cout << elem << endl;
+    }
+
     return 0;
 }
 
@@ -39,15 +43,19 @@ int append_strings()
         vec_s.push_back(input);
     }
 
+    for (auto &elem : vec_s) {
+        cout << elem << endl;
+    }
+
     return 0;
 }
 
 int main()
 {
-
+/*
     display_ex("Exercise 3.14");
     append_ints();
-
+*/
 
     display_ex("Exercise 3.15");
     append_strings();
