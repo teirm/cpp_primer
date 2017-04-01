@@ -5,11 +5,16 @@
 
 struct Person {
 
+    friend std::istream &read(std::istream &is, Person &p);
+    friend std::ostream &print(std::ostream &os, const Person &p);
+
+public:
     Person() = default;
     Person(const std::string name, const std::string address);
     std::string get_name() const { return name; }
     std::string get_address() const { return address; }
 
+private:
     std::string address;
     std::string name;
 };
