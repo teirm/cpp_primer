@@ -4,6 +4,9 @@
 
 HasPtr& HasPtr::operator=(const HasPtr &h)
 {
-    ps = new std::string(*h.ps);
+    auto newp = new std::string(*h.ps);
+    delete ps;
+    ps = newp; 
     i = h.i;
+    return *this;
 }

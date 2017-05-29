@@ -9,6 +9,7 @@ public:
     HasPtr(const HasPtr &h):
         ps(new std::string(*h.ps)), i(h.i) {}
     HasPtr& operator=(const HasPtr&);
+    ~HasPtr() { delete this->ps; }
 private:
     std::string *ps;
     int i;
