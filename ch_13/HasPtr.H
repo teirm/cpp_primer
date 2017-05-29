@@ -8,6 +8,7 @@ public:
         ps(new std::string(s)), i(0) {}
     HasPtr(const HasPtr &h):
         ps(new std::string(*h.ps)), i(h.i) {}
+    HasPtr& operator=(const HasPtr&);
 private:
     std::string *ps;
     int i;
