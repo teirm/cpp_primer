@@ -10,3 +10,4 @@ HasPtr& HasPtr::operator=(const HasPtr &h)
     i = h.i;
     return *this;
 }
+

@@ -67,3 +67,12 @@ void swap(Message &lhs, Message &rhs)
         f->addMsg(&rhs);
 }
 
+
+void  Message::debug_message()
+{
+    std::cerr << "Message: " << this->contents << std::endl
+              << "Folders: " << std::endl;
+    for (auto f : this->folders) {
+        std::cerr << "\tFolder: " << f->name << std::endl;
+    }
+}

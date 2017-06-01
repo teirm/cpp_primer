@@ -5,6 +5,7 @@
 
 #include <string>
 #include <set>
+#include <iostream>
 
 class Folder;
 
@@ -20,10 +21,12 @@ public:
     ~Message();
     void save(Folder&);
     void remove(Folder&);
+
+    void debug_message();    
+
 private:
     std::string contents;
     std::set<Folder*> folders;
-
     // utility functions used by copy constructor, assignment, and 
     // destructor
     void add_to_Folders(const Message&);
@@ -43,7 +46,12 @@ public:
      ~Folder();
      void addMsg(Message*);
      void remMsg(Message*);
+    
+     void debug_folder();
+
 private:
+     void add_to_Messages(const Folder&);
+     void remove_from_Messages();
      std::string name;
      std::set<Message*> messages;
 };
