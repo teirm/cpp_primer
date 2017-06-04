@@ -17,7 +17,7 @@ std::pair<std::string*, std::string*>
 StrVec::alloc_n_copy(const std::string* b, const std::string *e)
 {
     auto data = alloc.allocate(e - b);
-    return {data, uninitialized_copy(b, e, data)};
+    return {data, std::uninitialized_copy(b, e, data)};
 }
 
 void StrVec::free()
