@@ -19,6 +19,35 @@ MyString::MyString(char *s)
 }
 
 
+MyString::MyString(const MyString &s)
+{
+    std::cout << "MyString::MyString(const MyString &s)" 
+              << std::endl; 
+    size_t input_size = s.size();
+    elements = alloc.allocate(input_size);
+    
+    for (size_t i = 0; i < input_size; ++i) {
+        this->elements[i] = s.elements[i];
+    }
+    
+    this->elements[input_size] = '\0';
+    first_free = elements + input_size;
+    cap = elements + input_size;
+}
+
+MyString& MyString::operator=(const MyString &rhs)
+{
+    std::cout << "MyString::operator=(const MyString &rhs)" 
+              << std::endl; 
+    
+    auto data = alloc_n_copy(rhs.begin(), rhs.end());
+    free();
+    elements = data.first;
+    first_free = data.second;
+    cap = data.second;
+    return *this;
+}
+
 void MyString::free() {
 
     if (elements) {

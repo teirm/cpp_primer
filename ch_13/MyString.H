@@ -6,6 +6,7 @@
 #include <memory>
 #include <cstring>
 #include <utility>
+#include <iostream>
 
 class MyString {
 public:
@@ -16,13 +17,12 @@ public:
     MyString& operator=(const MyString&);
     ~MyString();
     size_t size() const { return first_free - elements; }
-    size_t capacity() const { return cap - elements; } 
+    size_t capacity() const { return cap - elements; }
+    char *begin() const { return elements; }
+    char *end() const { return first_free; }
 private:
     static std::allocator<char> alloc;
-    void chk_n_alloc()
-        { if (size() == capacity()) reallocate(); }
     std::pair<char*, char*> alloc_n_copy(const char*, const char*);
-    void reallocate();
     void free();
     char *elements;
     char *first_free;
