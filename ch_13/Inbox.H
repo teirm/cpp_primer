@@ -17,7 +17,9 @@ public:
     explicit Message(const std::string &str = ""):
         contents(str) {}
     Message(const Message&);
+    Message(Message&&);
     Message& operator=(const Message&);
+    Message& operator=(Message&&);
     ~Message();
     void save(Folder&);
     void remove(Folder&);
@@ -32,6 +34,7 @@ private:
     void add_to_Folders(const Message&);
     // remove this message from every Folder in folders
     void remove_from_Folders();
+    void move_Folders(Message*);
 };
 
 void swap(Message &lhs, Message &rhs);

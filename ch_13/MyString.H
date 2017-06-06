@@ -14,7 +14,9 @@ public:
         elements(nullptr), first_free(nullptr), cap(nullptr) { };
     MyString(char *);
     MyString(const MyString&);
+    MyString(MyString&&) noexcept;
     MyString& operator=(const MyString&);
+    MyString& operator=(MyString&&) noexcept;
     ~MyString();
     size_t size() const { return first_free - elements; }
     size_t capacity() const { return cap - elements; }

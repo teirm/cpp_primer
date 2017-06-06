@@ -35,6 +35,25 @@ MyString::MyString(const MyString &s)
     cap = elements + input_size;
 }
 
+MyString::MyString(MyString &&s) noexcept
+    : elements(s.elements), first_free(s.first_free), cap(s.cap)
+{
+    elements = first_free = cap = nullptr;
+}
+
+
+MyString& MyString::operator=(MyString &&rhs) noexcept
+{
+    if (this != &rhs) {
+        free();
+        elements = rhs.elements;
+        first_free= rhs.first_free;
+        cap = rhs.cap;
+        rhs.elements = rhs.first_free = rhs.cap = nullptr;
+    }
+    return *this;
+}
+
 MyString& MyString::operator=(const MyString &rhs)
 {
     std::cout << "MyString::operator=(const MyString &rhs)" 

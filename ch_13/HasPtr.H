@@ -10,6 +10,9 @@ public:
         ps(new std::string(s)), i(0) {}
     HasPtr(const HasPtr &h):
         ps(new std::string(*h.ps)), i(h.i) {}
+    HasPtr(HasPtr &&p) noexcept : ps(p.ps), i(p.i) {p.ps = 0;}
+    HasPtr& operator=(HasPtr rhs)
+        { swap(*this, rhs); return *this; }
     HasPtr& operator=(const HasPtr&);
     bool operator<(const HasPtr &b) { return *b.ps < *this->ps; }
     ~HasPtr() { delete this->ps; }
