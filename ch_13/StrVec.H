@@ -19,6 +19,7 @@ public:
     StrVec &operator=(StrVec&&) noexcept;
     ~StrVec();
     void push_back(const std::string&);
+    void push_back(std::string&&);
     size_t size() const { return first_free - elements; }
     size_t capacity() const { return cap - elements; }
     size_t resize(const size_t, const std::string& s="");

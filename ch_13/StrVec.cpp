@@ -13,6 +13,12 @@ void StrVec::push_back(const std::string& s)
     alloc.construct(first_free++, s);
 }
 
+void StrVec::push_back(std::string &&s)
+{
+    chk_n_alloc();
+    alloc.construct(first_free++, std::move(s));
+}
+
 std::pair<std::string*, std::string*>
 StrVec::alloc_n_copy(const std::string* b, const std::string *e)
 {

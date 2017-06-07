@@ -1,13 +1,13 @@
 /* Exercises for 13.1.2 */
 
 #include "HasPtr.H"
-
-HasPtr& HasPtr::operator=(const HasPtr &h)
+HasPtr &HasPtr::operator=(HasPtr &&rhs) noexcept
 {
-    auto newp = new std::string(*h.ps);
-    delete ps;
-    ps = newp; 
-    i = h.i;
+    if (this != &rhs) {
+        delete this->ps;
+        ps = rhs.ps;
+        i = rhs.i;
+        rhs.ps = nullptr;
+    }
     return *this;
 }
-

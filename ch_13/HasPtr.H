@@ -1,5 +1,8 @@
 /* Exercises for 13.1.1 */
 
+#ifndef HASPTR_GUARD
+#define HASPTR_GUARD
+
 #include <string>
 #include <iostream>
 
@@ -11,9 +14,9 @@ public:
     HasPtr(const HasPtr &h):
         ps(new std::string(*h.ps)), i(h.i) {}
     HasPtr(HasPtr &&p) noexcept : ps(p.ps), i(p.i) {p.ps = 0;}
-    HasPtr& operator=(HasPtr rhs)
+    HasPtr& operator=(HasPtr rhs) noexcept
         { swap(*this, rhs); return *this; }
-    HasPtr& operator=(const HasPtr&);
+    HasPtr& operator=(HasPtr&&) noexcept;
     bool operator<(const HasPtr &b) { return *b.ps < *this->ps; }
     ~HasPtr() { delete this->ps; }
 private:
@@ -29,3 +32,5 @@ void swap(HasPtr &lhs, HasPtr &rhs)
     swap(lhs.ps, rhs.ps);
     swap(lhs.i, rhs.i);
 }
+
+#endif
