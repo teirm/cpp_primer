@@ -41,6 +41,18 @@ public:
             wptr(a.data), curr(sz) { }
     std::string& deref() const;
     StrBlobPtr& incr();     // prefix version
+    StrBlobPtr& operator++();   // prefix
+    StrBlobPtr& operator--();   // prefix
+    StrBlobPtr operator++(int); // postfix
+    StrBlobPtr operator--(int); // postfix
+    std::string& operator*() const
+    { auto p = check(curr, "dereference past end");
+      return (*p)[curr];
+    }
+    std::string* operator->() const
+    {
+        return & this->operator*();
+    }
 private:
     // check returns a shared_ptr to the vector if check passes
     std::shared_ptr<std::vector<std::string>>
@@ -55,6 +67,14 @@ public:
     ConstStrBlobPtr(const StrBlob &a, size_t sz = 0):
         wptr(a.data), curr(sz) {}
     const std::string& deref() const;
+    std::string& operator*() const
+    { auto p = check(curr, "dereference past end");
+      return (*p)[curr];
+    }
+    std::string* operator->() const
+    {
+        return & this->operator*();
+    }
 private:
     const std::shared_ptr<std::vector<std::string>>
         check(std::size_t, const std::string&) const;
