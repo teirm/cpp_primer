@@ -20,7 +20,20 @@ protected:
     double price = 0.0;
 };
 
-class Bulk_quote : public Quote {
+class Disc_quote : public Quote {
+public:
+    Disc_quote() = default;
+    Disc_quote(const std::string& book, double price,
+               std::size_t qty, double disc):
+                    Quote(book, price),
+                    quantity(qty), discount(disc) { }
+    double net_price(std::size_t) const = 0;
+protected:
+    std::size_t quantity = 0;
+    double discount = 0.0;
+};
+
+class Bulk_quote : public Disc_quote {
 public:
     Bulk_quote() = default;
     Bulk_quote(
@@ -28,11 +41,8 @@ public:
         double                  sales_price,
         std::size_t             qty,
         double                  discount):
-        Quote(book, sales_price), min_qty(qty), discount(discount) { }
+        Disc_quote(book, sales_price, qty, discount) { }
     double net_price(std::size_t) const override;
-private:
-    std::size_t min_qty = 0;
-    double discount = 0.0;
 };
 
 #endif
