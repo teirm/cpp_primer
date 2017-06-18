@@ -27,6 +27,7 @@ private:
 class TextQuery {
 friend class QueryResult;
 public:
+    using line_no = std::vector<std::string>::size_type;
     TextQuery(std::ifstream &ifp);
     QueryResult queryWord(const std::string &s);
 private:
