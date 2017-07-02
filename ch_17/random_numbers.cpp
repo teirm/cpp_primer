@@ -54,6 +54,8 @@ void normal_dist()
         string s(values[i]/10000, '*');
         cout << i << "(" << values[i] << "): " << s << endl;
     }
+    
+    delete[] values;
 }
 
 int main()
